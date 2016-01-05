@@ -44,3 +44,6 @@ group :development do
 end
 
 gem 'neo4j', github: 'neo4jrb/neo4j'
+gem 'devise-neo4j'
+gem 'slim-rails'
+gem 'bootstrap-sass', '~> 3.3.6'
