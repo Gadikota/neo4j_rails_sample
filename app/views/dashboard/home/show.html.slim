@@ -1,2 +1,4 @@
-h1 Dashboard::Home#show
-p Find me in app/views/dashboard/home/show.html.slim
+= content_for :javascripts do
+  = javascript_include_tag "dashboard/home", 'data-turbolinks-track' => true
+
+h1 Voila
