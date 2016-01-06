@@ -1,0 +1,20 @@
+<br>
+Meetings List
+<% @meetings["meetings"].each do |meeting| %>
+  ID: <%= meeting["id"]%><br>
+  Topic: <%= meeting["topic"]%><br>
+<% end %>
+<br>
+Live Meetings List
+<% @live_meetings["meetings"].each do |meeting| %>
+  ID: <%= meeting["id"]%><br>
+  Topic: <%= meeting["topic"]%><br>
+<% end %>
+<br>
+<%= form_tag api_v1_meetings_path, method: :post do %>
+  Topic: <%= text_field_tag "topic" %>
+  <br>
+  Password: <%= text_field_tag "password" %>
+  <br>
+  <%= submit_tag "Create Meeting" %>
+<% end %>

@@ -1,0 +1,10 @@
+<% if @meeting["error"] %>
+  <%= @meeting["error"]["message"] %>
+<% else %>
+  <% if @meeting["status"] == 0 %>
+    <%= link_to "Start Meeting", @meeting["start_url"] %>
+  <% end %>
+  <%= @meeting["join_url"] %><br>
+  <%= @meeting["meetings"]%>
+  <%= link_to "End Meeting", api_v1_meeting_path(id: @meeting["id"]), method: :delete %>
+<% end %>
