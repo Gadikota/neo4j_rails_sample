@@ -1,3 +1,19 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $('input').change (e)->
+    $('input.parseCSV[type=file]').parse
+      before: (file, inputElem) ->
+        debugger;
+        # executed before parsing each file begins;
+        # what you return here controls the flow
+        return
+      step: (results, parser)->
+        debugger;
+        return
+      error: () ->
+        debugger;
+        # executed if an error occurs while loading the file,
+        # or if before callback aborted for some reason
+        return
+      complete: (results) ->
+        debugger;
+        return

@@ -32,7 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'pry'
 end
 
 group :development do
@@ -47,3 +47,5 @@ gem 'neo4j', github: 'neo4jrb/neo4j'
 gem 'devise-neo4j'
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'simple_form'
+gem "pundit"

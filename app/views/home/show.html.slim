@@ -1,1 +1,2 @@
-h1 Content here
+= simple_form_for(:hello, html: { class: 'form-horizontal' }) do |form|
+  = form.input :parseCSV, as: :file, input_html: { class: "parseCSV" }
