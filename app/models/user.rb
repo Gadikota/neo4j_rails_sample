@@ -1,5 +1,24 @@
+module RoleEnums
+  extend ActiveSupport::Concern
+  ROLES = { admin: 1, moderator: 2 }
+  included do
+    ROLES.keys.each do |role|
+      s = %{
+        def #{role}?
+          role == ROLES[role.try(:to_sym)]
+        end
+        def #{role}!
+          update_attribute(:role, role)
+        end
+      }
+      eval(s)
+    end
+  end
+end
+
 class User 
   include Neo4j::ActiveNode
+  include RoleEnums
     #
     # Neo4j.rb needs to have property definitions before any validations. So, the property block needs to come before
     # loading your devise modules.
@@ -63,5 +82,5 @@ class User
 
 
 
-
+  property :role, default: 2
 end
