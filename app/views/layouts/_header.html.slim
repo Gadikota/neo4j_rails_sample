@@ -36,3 +36,7 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar
         ul.nav.navbar-nav.pull-right
           li
             = link_to "Sign out", destroy_user_session_path, method: :delete
+      - else
+        ul.nav.navbar-nav.pull-right
+          li
+            = link_to "Sign in", new_user_session_path
