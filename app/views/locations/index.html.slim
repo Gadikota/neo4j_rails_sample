@@ -1,0 +1,32 @@
+- if policy(:location).import?
+  = render "locations/form", location: @location
+- data = render template: "locations/index.json.jbuilder", formats: [:json], locals: { locations: @locations, format: :json }
+- data = raw(data.html_safe);
+
+#map
+
+= content_for :javascripts do
+  javascript:
+    window.initMap = function(){
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+      });
+
+      heatmap = new google.maps.visualization.HeatmapLayer({
+        data: getPoints(),
+        map: map
+      });
+
+    }
+
+    getPoints = function(){
+      a = #{data}
+      results = []
+      for(i=0;i<a.locations.length; i++)
+        results.push(new google.maps.LatLng(a.locations[i][0], a.locations[i][1]))
+      return results
+    }
+
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyDmLGJ_PzBggFMxBRdG2faBj98leTaFiCQ&libraries=visualization&callback=initMap"
+
