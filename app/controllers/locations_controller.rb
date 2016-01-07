@@ -16,5 +16,9 @@ class LocationsController < ApplicationController
   def index
     @location = Location.new if policy(:location).import?
     @locations = policy_scope(Location)
+    respond_to do |format|
+      format.json
+      format.html
+    end
   end
 end

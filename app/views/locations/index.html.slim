@@ -1,32 +1,35 @@
 - if policy(:location).import?
   = render "locations/form", location: @location
-- data = render template: "locations/index.json.jbuilder", formats: [:json], locals: { locations: @locations, format: :json }
+- data = render template: "locations/index.json.jbuilder", formats: [:json], locals: { format: :json }
 - data = raw(data.html_safe);
 
-#map
+#map1
 
 = content_for :javascripts do
   javascript:
     window.initMap = function(){
-      map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
+      map = new google.maps.Map(document.getElementById('map1'), {
+        zoom: 9,
+        center: {lat: 17, lng: 78 },
+        mapTypeId: google.maps.MapTypeId.HYBRID
       });
 
       heatmap = new google.maps.visualization.HeatmapLayer({
         data: getPoints(),
-        map: map
+        map: map,
+        maxIntensity: 3,
+        opacity: 1
       });
-
+      heatmap.set('radius', 20)
     }
 
-    getPoints = function(){
+    window.getPoints = function(){
       a = #{data}
       results = []
       for(i=0;i<a.locations.length; i++)
-        results.push(new google.maps.LatLng(a.locations[i][0], a.locations[i][1]))
+        results.push({ location: new google.maps.LatLng(a.locations[i][0], a.locations[i][1]), weight: 3})
       return results
     }
-
-  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyDmLGJ_PzBggFMxBRdG2faBj98leTaFiCQ&libraries=visualization&callback=initMap"
+  
+  ' <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=visualization&callback=initMap"> </script>
 
