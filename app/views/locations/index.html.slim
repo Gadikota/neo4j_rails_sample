@@ -7,26 +7,28 @@
 
 = content_for :javascripts do
   javascript:
-    window.initMap = function(){
+    var map, heatmap;
+
+    function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
+        center: {lat: 17.3850, lng: 78.4867},
         mapTypeId: google.maps.MapTypeId.SATELLITE
       });
 
       heatmap = new google.maps.visualization.HeatmapLayer({
+        maxWeight: 3,
         data: getPoints(),
         map: map
       });
-
     }
 
     getPoints = function(){
       a = #{data}
       results = []
       for(i=0;i<a.locations.length; i++)
-        results.push(new google.maps.LatLng(a.locations[i][0], a.locations[i][1]))
+        results.push({ location: new google.maps.LatLng(a.locations[i][0], a.locations[i][1]), weight: 3 })
       return results
     }
 
-  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyDmLGJ_PzBggFMxBRdG2faBj98leTaFiCQ&libraries=visualization&callback=initMap"
-
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyCoioYO_CSi0zR3H5I5Ze3ME_InxLgf7h8&libraries=visualization&callback=initMap"
